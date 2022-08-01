@@ -17,7 +17,6 @@
 .photo {
     height: 250px;
     width: 100%;
-    /* overflow: hidden; */
     object-fit: cover;
 }
 

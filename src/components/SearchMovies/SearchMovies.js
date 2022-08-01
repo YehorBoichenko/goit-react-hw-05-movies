@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styles from '../SearchMovies/SearchMovies.module.css';
+import styles from '../SearchMovies/Searchbar.module.css';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 
@@ -20,16 +20,17 @@ export default function SearchMovies({ onSubmit }) {
 
   return (
     <header className={styles.searchbar}>
-      <form onSubmit={handleSubmit} className={styles.searchform}>
-        <button type="submit" className={styles.searchFormButton}>
-          <span className={styles.searchFormButtonLabel}>Search</span>
+      <form onSubmit={handleSubmit} className={styles.searchForm}>
+        <button type="submit" className={styles.searchButton}>
+          <span className={styles.searchButtonLabel}>Search</span>
         </button>
         <input
-          type="text"
-          placeholder="Search movies"
-          onChange={handleChanger}
-          value={query}
           className={styles.searchFormInput}
+          type="text"
+          autoComplete="off"
+          autoFocus
+          placeholder="Search films "
+          onChange={handleChanger}
         />
       </form>
     </header>

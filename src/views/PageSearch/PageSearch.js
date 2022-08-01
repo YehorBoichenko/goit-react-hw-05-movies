@@ -1,38 +1,35 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 import * as fetchAPI from '../../API/MoviesApi';
 import SearchMovies from '../../components/SearchMovies/SearchMovies';
 import MoviesGallery from 'components/MoviesGallery/MoviesGallery';
-import styles from '../PageSearch/PageSearch.module.css';
+import styles from '../../components/SearchMovies/Searchbar.module.css';
 
 export default function PageSearch() {
   const [movies, setMovies] = useState(null);
-  const [query, setQuery] = useState('');
-  const history = useNavigate();
+  const searchParam = useSearchParams();
+  const [query, setQuery] = useState(() => searchParam[0].get('query') ?? '');
+  const navigate = useNavigate();
   const location = useLocation();
-  useEffect(() => {
-    if (location.search === '') {
-      return;
-    }
-    const newSearch = new URLSearchParams(location.search).get('query');
-    setQuery(newSearch);
-  }, [history, location]);
+
   useEffect(() => {
     query && getMovies();
   });
   const getMovies = () => {
     fetchAPI.fetchSearchMovies(query).then(({ results }) => {
       if (results.length === 0) {
-        toast.error(`There are no results. Try another ${query}`);
+        toast.error(`There are is no results found.Please try another request`);
+        return;
       }
       setMovies(results);
     });
   };
+
   const onSubmit = query => {
     setQuery(query);
     setMovies([]);
-    history.push({ ...location, search: `querry=${query}` });
+    navigate({ ...location, search: `query=${query}` });
   };
   return (
     <>

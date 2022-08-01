@@ -1,5 +1,4 @@
-import { Routes } from 'react-router';
-import { Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import LoaderSpinner from './Loader/Loader';
 import AppBar from './AppBar/AppBar';
@@ -7,6 +6,8 @@ import Container from './Container/Container';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import styles from '../components/App.module.css';
+import Cast from './Cast/Cast';
+import Reviews from './Reviews/Reviews';
 
 const HomePage = lazy(() => import('../views/HomePage'));
 const PageSearch = lazy(() => import('../views/PageSearch/PageSearch'));
@@ -20,7 +21,10 @@ export default function App() {
         <Routes>
           <Route path="/" element={<HomePage />}></Route>
           <Route path="/movies" element={<PageSearch />}></Route>
-          <Route path="/movies/:movieId" element={<Moviepage />}></Route>
+          <Route path="/movies/:movieId" element={<Moviepage />}>
+            <Route path="Cast" element={<Cast />} />
+            <Route path="Reviews" element={<Reviews />} />
+          </Route>
         </Routes>
       </Suspense>
       <ToastContainer
@@ -28,6 +32,7 @@ export default function App() {
         closeOnClick
         rtl={false}
         pauseOnFocusLoss
+        draggable
         pauseOnHover
       />
     </Container>

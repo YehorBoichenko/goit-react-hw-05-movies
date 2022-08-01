@@ -32,7 +32,7 @@ export function fetchCast(movieId) {
     .get(
       `${API_URL_SEARCH}movie/${movieId}/credits?api_key=${API_KEY}&language=en-US`
     )
-    .then(({ data }) => data)
+    .then(({ data }) => data.cast)
     .catch(error => error);
 }
 
@@ -41,6 +41,6 @@ export function fetchMoviesByReviews(movieId) {
     .get(
       `${API_URL_SEARCH}movie/${movieId}/reviews?api_key=${API_KEY}&language=en-US&page=1`
     )
-    .then(({ data }) => data)
+    .then(({ data }) => data.results)
     .catch(error => error);
 }

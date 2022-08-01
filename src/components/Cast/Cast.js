@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import * as fetchAPI from '../../API/MoviesApi';
 import styles from '../Cast/Cast.module.css';
-import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
 
 import photo from '../../images/NotFound.png';
-export default function Cast({ movieId }) {
-  const [{ cast }, setCast] = useState([]);
+export default function Cast() {
+  const [cast, setCast] = useState([]);
+  const { movieId } = useParams();
   useEffect(() => {
     fetchAPI.fetchCast(movieId).then(setCast);
   }, [movieId]);
@@ -33,7 +34,3 @@ export default function Cast({ movieId }) {
     </ul>
   );
 }
-
-Cast.propTypes = {
-  movieId: PropTypes.object.isRequired,
-};

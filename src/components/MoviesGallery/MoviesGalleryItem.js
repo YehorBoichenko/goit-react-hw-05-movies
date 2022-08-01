@@ -10,9 +10,9 @@ export default function MoviesGalleryItem({ movie }) {
       <Link
         className={styles.GalleryItemMovies}
         to={{
-          pathName: `movies/${movie.id}`,
+          pathname: `/movies/${movie.id}`,
           state: { from: location },
-          label: 'Back to Movies',
+          label: 'Back to movies list',
         }}
       >
         <img

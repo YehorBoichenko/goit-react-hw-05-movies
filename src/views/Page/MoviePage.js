@@ -1,30 +1,27 @@
-import { useState, useEffect } from 'react';
-import { Routes } from 'react-router';
+import { useState, useEffect, Suspense } from 'react';
 import {
-  Route,
+  Outlet,
   Link,
   useParams,
   useNavigate,
   useLocation,
-  useMatch,
 } from 'react-router-dom';
-import MovieDetails from 'components/MovieDetails/MovieDetails';
-import Cast from 'components/Cast/Cast';
-import Reviews from 'components/Reviews/Reviews';
+import LoaderSpinner from '../../components/Loader/Loader';
+import MovieDetails from '../../components/MovieDetails/MovieDetails';
 import * as fetchAPI from '../../API/MoviesApi';
 import styles from '../Page/MoviePage.module.css';
 
 export default function MoviePage() {
-  const history = useNavigate();
+  const navigate = useNavigate();
   const location = useLocation();
   const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
-  const { url } = useMatch();
+  // const { url } = useMatch();
   useEffect(() => {
     fetchAPI.fetchMoviesId(movieId).then(setMovie);
   }, [movieId]);
   const goBack = () => {
-    history.push({
+    navigate({
       pathname: location.state?.backUrl || '/',
       search: location.state?.searchValue || '',
     });
@@ -41,7 +38,19 @@ export default function MoviePage() {
             <h4 className={styles.addTitle}>Additional information:</h4>
             <Link
               to={{
-                pathname: `${url}/cast`,
+                pathname: `/movies/${movieId}/cast`,
+                state: {
+                  backUrl: `${location.state?.searchValue ? `/movies` : `/`}`,
+                  searchValue: location.state?.searchValue || '',
+                },
+              }}
+              className={styles.link}
+            >
+              Cast
+            </Link>
+            <Link
+              to={{
+                pathname: `/movies/${movieId}/reviews`,
                 state: {
                   backUrl: `${location.state?.searchValue ? `/movies` : `/`}`,
                   searchValue: location.state?.searchValue || '',
@@ -51,17 +60,10 @@ export default function MoviePage() {
             >
               Reviews
             </Link>
+            <Suspense fallback={<LoaderSpinner />}>
+              <Outlet />
+            </Suspense>
           </div>
-          <Routes>
-            <Route
-              path={`${url}/cast`}
-              element={<Cast movieId={movieId} />}
-            ></Route>
-            <Route
-              path={`${url}/reviews`}
-              element={<Reviews movieId={movieId} />}
-            ></Route>
-          </Routes>
         </>
       )}
     </>

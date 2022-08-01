@@ -1,5 +1,5 @@
 import styles from '../MovieDetails/MovieDetails.module.css';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 export default function MovieDetails({ movie }) {
   return (
@@ -13,7 +13,6 @@ export default function MovieDetails({ movie }) {
       <div className={styles.movieInfo}>
         <h2 className={styles.movieTitle}>{movie.original_title}</h2>
         <p className={styles.infoItem}>
-          {' '}
           User score:
           <span className={styles.infoSum}>{movie.vote_average}</span>
         </p>
@@ -21,7 +20,6 @@ export default function MovieDetails({ movie }) {
           Overview:<span className={styles.infoSum}>{movie.overview}</span>
         </p>
         <p className={styles.infoItem}>
-          {' '}
           Genres:
           <span className={styles.infoSum}>
             {movie.genres.map(genre => genre.name).join('/')}
@@ -31,6 +29,6 @@ export default function MovieDetails({ movie }) {
     </div>
   );
 }
-MovieDetails.propTypes = {
-  movies: PropTypes.object.isRequired,
-};
+// MovieDetails.propTypes = {
+//   movies: PropTypes.object.isRequired,
+// };

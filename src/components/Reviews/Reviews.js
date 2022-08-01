@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import * as fetchAPI from '../../API/MoviesApi';
 import styles from '../Reviews/Reviews.module.css';
-import Proptypes from 'prop-types';
 
-export default function Reviews({ movieId }) {
-  const [{ results }, setReviews] = useState([]);
+export default function Reviews() {
+  const [results, setReviews] = useState([]);
+  const { movieId } = useParams();
 
   useEffect(() => {
     fetchAPI.fetchMoviesByReviews(movieId).then(setReviews);
@@ -29,7 +30,3 @@ export default function Reviews({ movieId }) {
     </>
   );
 }
-
-Reviews.propTypes = {
-  movieId: Proptypes.object.isRequired,
-};
