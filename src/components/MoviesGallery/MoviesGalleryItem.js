@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 
 export default function MoviesGalleryItem({ movie }) {
   const location = useLocation();
-  console.log(location);
 
   return (
     <li className={styles.MoviesGalleryItem}>
