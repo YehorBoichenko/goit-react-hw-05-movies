@@ -12,6 +12,7 @@ import Reviews from './Reviews/Reviews';
 const HomePage = lazy(() => import('../views/HomePage'));
 const PageSearch = lazy(() => import('../views/PageSearch/PageSearch'));
 const Moviepage = lazy(() => import('../views/Page/MoviePage'));
+const NotFound = lazy(() => import('../views/Page/NotFound'));
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
             <Route path="Cast" element={<Cast />} />
             <Route path="Reviews" element={<Reviews />} />
           </Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
       <ToastContainer
