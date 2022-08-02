@@ -1,18 +1,13 @@
 import { useState, useEffect, Suspense } from 'react';
-import {
-  Outlet,
-  Link,
-  useParams,
-  useNavigate,
-  useLocation,
-} from 'react-router-dom';
+import { Outlet, Link, useParams, useLocation } from 'react-router-dom';
 import LoaderSpinner from '../../components/Loader/Loader';
 import MovieDetails from '../../components/MovieDetails/MovieDetails';
 import * as fetchAPI from '../../API/MoviesApi';
 import styles from '../Page/MoviePage.module.css';
+import { ButtonLinkStyled } from './Btn.styled';
 
 export default function MoviePage() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const location = useLocation();
   const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
@@ -20,17 +15,25 @@ export default function MoviePage() {
   useEffect(() => {
     fetchAPI.fetchMoviesId(movieId).then(setMovie);
   }, [movieId]);
-  const goBack = () => {
-    navigate({
-      pathname: location.state?.backUrl || '/',
-      search: location.state?.searchValue || '',
-    });
-  };
+
+  // const goBack = () => {
+  //   navigate({
+  //     pathname: location.state.from.search || '/movies',
+  //     search: location.state?.searchValue || '',
+  //   });
+  // };
+
+  console.log(location);
+
   return (
     <>
-      <button type="submit" onClick={goBack} className={styles.button}>
+      <ButtonLinkStyled
+        to={location?.state?.from ?? '/'}
+        type="button"
+        className={styles.button}
+      >
         Go back
-      </button>
+      </ButtonLinkStyled>
       {movie && (
         <>
           <div className={styles.wrapper}>
@@ -40,8 +43,7 @@ export default function MoviePage() {
               to={{
                 pathname: `/movies/${movieId}/cast`,
                 state: {
-                  backUrl: `${location.state?.searchValue ? `/movies` : `/`}`,
-                  searchValue: location.state?.searchValue || '',
+                  backUrl: `${location.state?.searchValue ? `/movies/` : `/`}`,
                 },
               }}
               className={styles.link}
@@ -53,7 +55,6 @@ export default function MoviePage() {
                 pathname: `/movies/${movieId}/reviews`,
                 state: {
                   backUrl: `${location.state?.searchValue ? `/movies` : `/`}`,
-                  searchValue: location.state?.searchValue || '',
                 },
               }}
               className={styles.link}

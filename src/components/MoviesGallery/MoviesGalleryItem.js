@@ -5,15 +5,14 @@ import PropTypes from 'prop-types';
 
 export default function MoviesGalleryItem({ movie }) {
   const location = useLocation();
+  console.log(location);
+
   return (
     <li className={styles.MoviesGalleryItem}>
       <Link
         className={styles.GalleryItemMovies}
-        to={{
-          pathname: `/movies/${movie.id}`,
-          state: { from: location },
-          label: 'Back to movies list',
-        }}
+        to={`/movies/${movie.id}`}
+        state={{ from: location }}
       >
         <img
           src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}

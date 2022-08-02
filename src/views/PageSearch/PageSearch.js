@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import * as fetchAPI from '../../API/MoviesApi';
 import SearchMovies from '../../components/SearchMovies/SearchMovies';
 import MoviesGallery from 'components/MoviesGallery/MoviesGallery';
@@ -11,7 +11,7 @@ export default function PageSearch() {
   const searchParam = useSearchParams();
   const [query, setQuery] = useState(() => searchParam[0].get('query') ?? '');
   const navigate = useNavigate();
-  const location = useLocation();
+  // const location = useLocation();
 
   useEffect(() => {
     query && getMovies();
@@ -29,8 +29,9 @@ export default function PageSearch() {
   const onSubmit = query => {
     setQuery(query);
     setMovies([]);
-    navigate({ ...location, search: `query=${query}` });
+    navigate({ search: `?query=${query}` });
   };
+
   return (
     <>
       <SearchMovies onSubmit={onSubmit} className={styles.searchbar} />
