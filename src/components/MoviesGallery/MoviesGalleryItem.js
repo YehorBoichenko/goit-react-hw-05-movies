@@ -21,7 +21,7 @@ export default function MoviesGalleryItem({ movie }) {
           width="300"
           className={styles.image}
         />
-        <div className={styles.titleTumb}>
+        <div className={styles.titleWrapper}>
           <span className={styles.movieTitle}>{movie.title}</span>
         </div>
       </Link>

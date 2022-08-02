@@ -1,5 +1,4 @@
 import styles from '../MovieDetails/MovieDetails.module.css';
-// import PropTypes from 'prop-types';
 
 export default function MovieDetails({ movie }) {
   return (
@@ -12,9 +11,9 @@ export default function MovieDetails({ movie }) {
       />
       <div className={styles.movieInfo}>
         <h2 className={styles.movieTitle}>{movie.original_title}</h2>
-        <p className={styles.infoItem}>
+        <p className={styles.movieItem}>
           User score:
-          <span className={styles.infoSum}>{movie.vote_average}</span>
+          <span className={styles.voteSum}>{movie.vote_average}</span>
         </p>
         <p className={styles.infoItem}>
           Overview:<span className={styles.infoSum}>{movie.overview}</span>
@@ -29,6 +28,3 @@ export default function MovieDetails({ movie }) {
     </div>
   );
 }
-// MovieDetails.propTypes = {
-//   movies: PropTypes.object.isRequired,
-// };

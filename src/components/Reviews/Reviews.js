@@ -16,8 +16,8 @@ export default function Reviews() {
       <ul>
         {results && results.length > 0 ? (
           results.map(result => (
-            <li key={result.id} className={styles.ReviewCard}>
-              <div className={styles.imageSection}>
+            <li key={result.id} className={styles.reviewCard}>
+              <div className={styles.imagesSection}>
                 <b>{result.author}:</b>
                 <p>{result.content}</p>
               </div>

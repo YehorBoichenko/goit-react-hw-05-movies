@@ -9,7 +9,7 @@
 
 .btn:hover,
 .btn:focus {
-    color: rgb(10, 129, 158);
+    color: rgb(10, 47, 158);
 }
 
 .link {
@@ -20,11 +20,11 @@
 
 .link:hover,
 .link:focus {
-    color: rgb(10, 129, 158);
+    color: rgb(10, 47, 158);
 }
 
 .addTitle {
     margin-top: 25px;
-    color: rgb(10, 129, 158);
+    color: rgb(10, 47, 158);
     font-weight: 600;
 }
