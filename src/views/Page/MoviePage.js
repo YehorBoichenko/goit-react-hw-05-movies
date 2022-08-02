@@ -23,8 +23,6 @@ export default function MoviePage() {
   //   });
   // };
 
-  console.log(location);
-
   return (
     <>
       <ButtonLinkStyled
@@ -42,10 +40,8 @@ export default function MoviePage() {
             <Link
               to={{
                 pathname: `/movies/${movieId}/cast`,
-                state: {
-                  backUrl: `${location.state?.searchValue ? `/movies/` : `/`}`,
-                },
               }}
+              state={{ from: location.state?.from }}
               className={styles.link}
             >
               Cast
@@ -53,10 +49,8 @@ export default function MoviePage() {
             <Link
               to={{
                 pathname: `/movies/${movieId}/reviews`,
-                state: {
-                  backUrl: `${location.state?.searchValue ? `/movies` : `/`}`,
-                },
               }}
+              state={{ from: location.state?.from }}
               className={styles.link}
             >
               Reviews
